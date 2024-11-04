@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>API Explorer Hub | João Khalaf</title>
+</head>
+<body>
+
+<header>
+    <h1>API Explorer Hub</h1>
+    <p>Explore e interaja com diferentes APIs em um só lugar</p>
+</header>
+
+<main>
+    <section id="pokemon-explorer">
+        <h2>Pokémon Explorer</h2>
+        <div class="input-group">
+            <input type="text" id="pokemonName" placeholder="Digite o nome do Pokémon...">
+            <button onclick="fetchDataPokemon()">Buscar Pokémon</button>
+        </div>
+        <div class="result-container">
+            <div id="loadingSpinner" class="loading-spinner" style="display: none;"></div>
+            <img src="" alt="Pokémon Sprite" id="pokemonSprite" style="display: none">
+        </div>
+    </section>
+
+    <section id="movie-manager">
+        <h2>Gerenciador de Filmes</h2>
+        <div class="input-group">
+            <input type="text" id="movieInput" placeholder="Digite o nome do filme...">
+            <button onclick="createMovie()">Adicionar Filme</button>
+        </div>
+        <div class="movie-list-container">
+            <h3>Filmes</h3>
+            <ul id="movieList"></ul>
+        </div>
+    </section>
+
+    <section id="waifu-gallery">
+        <h2>Galeria de Waifu</h2>
+        <button id="refresh-button" type="button">Atualizar Imagens</button>
+        <div class="image-gallery" id="image-gallery"></div>
+    </section>
+
+    <section id="anime-explorer">
+        <div class="anime-search">
+            <h2>Explorador de Anime</h2>
+            <div class="input-group">
+                <input type="text" id="busca-anime" placeholder="Buscar Anime...">
+                <button id="btn-busca">Buscar</button>
+                <button id="btn-personagem">Personagem Aleatório</button>
+            </div>
+        </div>
+
+        <div class="random-content">
+            <h2>Descobertas Aleatórias</h2>
+            <button id="btn-anime-aleatorio">Anime Aleatório</button>
+            <div id="anime-aleatorio" class="anime"></div>
+            <div id="personagem-aleatorio" class="personagem"></div>
+        </div>
+
+        <div class="favoritos">
+            <h3>Meus Favoritos</h3>
+            <div class="favorites-content">
+                <div class="favorites-section">
+                    <h4>Animes Favoritos</h4>
+                    <ul id="favoritos-animes"></ul>
+                </div>
+                <div class="favorites-section">
+                    <h4>Personagens Favoritos</h4>
+                    <ul id="favoritos-personagens"></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>Desenvolvido por João Khalaf</p>
+    <p>&copy; 2024 API Explorer Hub.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
