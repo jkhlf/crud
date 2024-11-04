@@ -203,9 +203,7 @@ function updateMovieList() {
 updateMovieList();
 
 
-
 //Waifu Api 
-
 // Função para construir a URL de requisição
 function buildApiUrl(params) {
   const apiUrl = 'https://api.waifu.im/search';
@@ -242,7 +240,7 @@ function fetchImages() {
       .then(data => {
           console.log('Dados recebidos da API:', data);
           if (data.images && data.images.length > 0) {
-              displayImages(data.images); // Exibir imagens recebidas
+              displayImages(data.images); 
           } else {
               console.log('Nenhuma imagem foi retornada pela API.');
           }
@@ -256,7 +254,7 @@ function fetchImages() {
 // Função para exibir imagens diretamente
 function displayImages(images) {
   const gallery = document.getElementById('image-gallery');
-  gallery.innerHTML = ''; // Limpar imagens anteriores
+  gallery.innerHTML = ''; 
   images.forEach(image => {
       const imgElement = document.createElement('img');
       imgElement.src = image.url;
