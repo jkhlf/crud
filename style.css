@@ -183,6 +183,10 @@
     background-color: #218838;
   }
   
+  #valorant-content{
+    border-left: 4px solid #e32db8;
+  }
+
   #pokemon-explorer {
     border-left: 4px solid #4f46e5;
   }
@@ -247,7 +251,30 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
-  
+
+  .agents-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.agent-item {
+    background: white;
+    border: 1px solid var(--section-border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    max-width: 300px;
+    text-align: center;
+}
+
+.agent-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+}
+
   .image-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

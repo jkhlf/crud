@@ -1,3 +1,39 @@
+document.getElementById('fetchAgentsButton').addEventListener('click', () => {
+    fetch('https://valorant-api.com/v1/agents')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const agentsList = document.getElementById('agentsList');
+            agentsList.innerHTML = '';
+
+            data.data.forEach(agent => {
+                const agentItem = document.createElement('div');
+                agentItem.classList.add('agent-item');
+                agentItem.innerHTML = `
+                    <img src="${agent.displayIcon}" alt="${agent.displayName}">
+                    <h3>${agent.displayName}</h3>
+                    <p>${agent.description}</p>
+                    <h4>Habilidades:</h4>
+                    <ul>
+                        ${agent.abilities.map(ability => `
+                            <li>
+                                <strong>${ability.displayName}:</strong> ${ability.description}
+                            </li>
+                        `).join('')}
+                    </ul>
+                `;
+                agentsList.appendChild(agentItem);
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao buscar agentes do Valorant:', error);
+        });
+});
+
 //Pokemon API 
 
 function fetchDataPokemon() {
