@@ -4,9 +4,10 @@ Uma aplicação web que utiliza quatro APIs diferentes: a API do Pokémon, a API
 
 ## Funcionalidades
 
+- **Valorant**: Busca informações sobre cada Agente e suas habilidades.
 - **Pokémon**: O usuário pode pesquisar por um Pokémon e visualizar sua miniatura.
 - **Filmes**: O usuário pode adicionar, editar e excluir filmes da sua lista. Ao clicar no botão "Detalhes", a aplicação busca as informações do filme na API do OMDB e as exibe.
-- **Waifu Gallery**: Carrega 5 imagens de waifus ou qualquer tag que voce passe nos parametros.
+- **Waifu Gallery**: Exibe 5 imagens de waifus ou qualquer tag fornecida nos parâmetros.
 - **Animes e Personagens**: O usuário pode visualizar animes e personagens aleatórios, além de adicioná-los à lista de favoritos.
 
 ## Tecnologias Utilizadas

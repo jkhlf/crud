@@ -259,9 +259,8 @@ function fetchImages() {
   const params = {
       included_tags: ['waifu'],
       height: '>=2000',
-      is_nsfw: false,
       many: true,
-      limit: 5
+      limit: 3
   };
   const requestUrl = buildApiUrl(params);
   console.log('Requisição para API:', requestUrl);
