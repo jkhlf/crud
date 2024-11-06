@@ -1,4 +1,4 @@
-# Crud Api's
+# CRUD, But Without the CRUD Api's
 
 Uma aplicação web que utiliza quatro APIs diferentes: a API do Pokémon, a API do OMDB (Open Movie Database), Waifu.im e a API do Jikan (para obter informações sobre animes e personagens).
 

@@ -23,17 +23,6 @@ app.get('/api/omdb/:movie', (req, res) => {
         });
 });
 
-// Rota para buscar personagens e mapas do Valorant
-app.get('/api/valorant/content', (req, res) => {
-    axios.get(`https://br.api.riotgames.com/val/content/v1/contents?locale=pt-BR&api_key=${process.env.RIOT_API_KEY}`)
-        .then(response => {
-            res.json(response.data); // Envia os dados da API para o front-end
-        })
-        .catch(error => {
-            console.error('Erro ao buscar dados do Valorant Content:', error);
-            res.status(500).send('Erro ao buscar dados do Valorant Content');
-        });
-});
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);

@@ -1,3 +1,4 @@
+
 document.getElementById('fetchAgentsButton').addEventListener('click', () => {
     fetch('https://valorant-api.com/v1/agents')
         .then(response => {
