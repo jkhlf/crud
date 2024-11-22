@@ -53,11 +53,11 @@ function fetchDataPokemon() {
         })
         .then(data => {
             pokemonSprite.src = data.sprites.front_default; // Define a imagem do Pokémon
-            pokemonSprite.style.display = 'block'; // Torna a imagem visível
+            pokemonSprite.style.display = 'block'; 
         })
         .catch(error => {
             console.error(error);
-            alert('Erro: ' + error.message); // Exibe um erro se o Pokémon não for encontrado
+            alert('Erro: ' + error.message); 
         });
 }
 
@@ -69,27 +69,27 @@ let movieCollection = [];
 
 function createMovie() {
     const movieInput = document.getElementById('movieInput');
-    const movie = movieInput.value.trim();
+    const movie = movieInput.value.trim(); // Remove espaços extras do valor
+
+    // Se houver um filme digitado, adiciona à coleção
     if (movie) {
-        movieCollection.push(movie);
-        updateMovieList();
-        movieInput.value = ''; // Limpa o input
-        showNotification(`Filme "${movie}" adicionado com sucesso!`);
+        movieCollection.push(movie); // Adiciona o filme à coleção
+        updateMovieList(); // Atualiza a lista de filmes exibida
+        movieInput.value = '';
+        showNotification(`Filme "${movie}" adicionado com sucesso!`); 
     }
 }
 
-// Função para buscar detalhes do filme na API
 function fetchMovieDetails(movie) {
-     const url = `http://localhost:3000/api/omdb/${encodeURIComponent(movie)}`;
+    const url = `http://localhost:3000/api/omdb/${encodeURIComponent(movie)}`;
     return fetch(url)
         .then(response => response.json())
-        .catch(error => {
+        .catch(error => { 
             console.error('Erro ao buscar detalhes do filme:', error);
             return null;
         });
 }
 
-// Função para ler detalhes do filme e atualizar o elemento
 function readMovie(movie, movieElement) {
     movieElement.innerHTML = `
         <div class="loading-spinner">
@@ -97,17 +97,16 @@ function readMovie(movie, movieElement) {
         </div>
     `;
     fetchMovieDetails(movie).then(data => {
-        if (data && data.Response === "True") {
-            updateMovieElement(movieElement, data);
+        if (data && data.Response === "True") { // Se a resposta for válida
+            updateMovieElement(movieElement, data); // Atualiza o elemento com os dados do filme
         } else {
-            showError(movieElement, 'Filme não encontrado.');
+            showError(movieElement, 'Filme não encontrado.'); 
         }
     }).catch(() => {
         showError(movieElement, 'Erro ao carregar os dados do filme.');
     });
 }
 
-// Função para atualizar o elemento do filme com os detalhes
 function updateMovieElement(movieElement, data) {
     movieElement.innerHTML = `
         <div class="movie-details-grid">
@@ -138,7 +137,6 @@ function updateMovieElement(movieElement, data) {
     `;
 }
 
-// Função para mostrar erro
 function showError(movieElement, message) {
     movieElement.innerHTML = `
         <div class="error-message">
@@ -148,33 +146,32 @@ function showError(movieElement, message) {
     `;
 }
 
-// Função para atualizar um filme
 function updateMovie(oldMovie, newMovie) {
-    const index = movieCollection.indexOf(oldMovie);
-    if (index !== -1 && newMovie.trim()) {
-        movieCollection[index] = newMovie.trim();
-        updateMovieList();
-        showNotification(`Filme atualizado: "${oldMovie}" → "${newMovie}"`);
+    const index = movieCollection.indexOf(oldMovie); // Encontra o índice do filme antigo
+    if (index !== -1 && newMovie.trim()) { // Verifica se o filme existe e o novo nome é válido
+        movieCollection[index] = newMovie.trim(); // Atualiza o filme na coleção
+        updateMovieList(); 
+        showNotification(`Filme atualizado: "${oldMovie}" → "${newMovie}"`); 
     }
 }
 
-// Função para deletar um filme
+// Função para deletar um filme da coleção
 function deleteMovie(movie) {
-    const index = movieCollection.indexOf(movie);
+    const index = movieCollection.indexOf(movie); // Encontra o índice do filme
     if (index !== -1) {
-        if (confirm(`Tem certeza que deseja excluir "${movie}" da sua lista?`)) {
-            movieCollection.splice(index, 1);
+        if (confirm(`Tem certeza que deseja excluir "${movie}" da sua lista?`)) { 
+            movieCollection.splice(index, 1); // Remove o filme da coleção ; quantidade de elementos a serem removidos
             updateMovieList();
             showNotification(`Filme "${movie}" removido da lista`);
         }
     }
 }
 
-// Função para atualizar a lista de filmes
 function updateMovieList() {
     const movieList = document.getElementById('movieList');
-    movieList.innerHTML = '';
+    movieList.innerHTML = ''; 
 
+    // Para cada filme na coleção, cria um card na lista
     movieCollection.forEach((movie) => {
         const card = document.createElement('li');
         card.className = 'movie-card';
@@ -205,6 +202,7 @@ function updateMovieList() {
         detailsContainer.className = 'movie-details-container';
         detailsContainer.style.display = 'none';
         
+        // Ao clicar em "Detalhes", exibe ou esconde detalhes e chama `readMovie`
         detailsButton.onclick = () => {
             if (detailsContainer.style.display === 'none') {
                 detailsContainer.style.display = 'block';
@@ -217,12 +215,13 @@ function updateMovieList() {
         };
         
         editButton.onclick = () => {
-            const newMovie = prompt('Digite o novo nome do filme:', movie);
-            if (newMovie) updateMovie(movie, newMovie);
+            const newMovie = prompt('Digite o novo nome do filme:', movie); 
+            if (newMovie) updateMovie(movie, newMovie); // Atualiza o filme se o nome é válido
         };
         
         deleteButton.onclick = () => deleteMovie(movie);
-        
+
+        // Monta o card do filme com seus botões e detalhes
         buttonGroup.appendChild(detailsButton);
         buttonGroup.appendChild(editButton);
         buttonGroup.appendChild(deleteButton);
@@ -232,76 +231,11 @@ function updateMovieList() {
         movieContent.appendChild(detailsContainer);
         
         card.appendChild(movieContent);
-        movieList.appendChild(card);
+        movieList.appendChild(card); // Adiciona o card na lista
     });
 }
 
-// Inicializa a lista
 updateMovieList();
-
-
-//Waifu Api 
-// Função para construir a URL de requisição
-function buildApiUrl(params) {
-  const apiUrl = 'https://api.waifu.im/search';
-  const queryParams = new URLSearchParams();
-  for (const key in params) {
-      if (Array.isArray(params[key])) {
-          params[key].forEach(value => queryParams.append(key, value));
-      } else {
-          queryParams.set(key, params[key]);
-      }
-  }
-  return `${apiUrl}?${queryParams.toString()}`;
-}
-
-function fetchImages() {
-  const params = {
-      included_tags: ['waifu'],
-      height: '>=2000',
-      many: true,
-      limit: 3
-  };
-  const requestUrl = buildApiUrl(params);
-  console.log('Requisição para API:', requestUrl);
-  
-  fetch(requestUrl, { headers: { 'Content-Type': 'application/json' } })
-      .then(response => {
-          if (response.ok) {
-              return response.json();
-          } else {
-              throw new Error('Request failed with status code: ' + response.status);
-          }
-      })
-      .then(data => {
-          console.log('Dados recebidos da API:', data);
-          if (data.images && data.images.length > 0) {
-              displayImages(data.images); 
-          } else {
-              console.log('Nenhuma imagem foi retornada pela API.');
-          }
-      })
-      .catch(error => {
-          console.error('Ocorreu um erro:', error.message);
-          showNotification('Erro ao carregar imagens. Tente novamente mais tarde.');
-      });
-}
-
-// Função para exibir imagens diretamente
-function displayImages(images) {
-  const gallery = document.getElementById('image-gallery');
-  gallery.innerHTML = ''; 
-  images.forEach(image => {
-      const imgElement = document.createElement('img');
-      imgElement.src = image.url;
-      gallery.appendChild(imgElement);
-  });
-}
-
-// Atualizar imagens ao clicar no botão
-document.getElementById('refresh-button').addEventListener('click', fetchImages);
-
-window.onload = fetchImages;
 
 
 
@@ -344,13 +278,17 @@ function buscarAnimePorNome(nome) {
     return fetchData(`/anime?q=${encodeURIComponent(nome)}`);
 }
 
-// Função para adicionar item aos favoritos
 function adicionarFavorito(lista, item, container) {
+    // `.some()` retorna `true` se encontrar um item com o mesmo `mal_id`.
     if (!lista.some(fav => fav.mal_id === item.mal_id)) {
+        
         lista.push(item);
         const li = document.createElement("li");
+        
+        // Define o texto do <li> com o título ou nome do item (dependendo de qual estiver disponível).
         li.textContent = item.title || item.name;
         container.appendChild(li);
+        
         console.log(`${item.title || item.name} adicionado aos favoritos.`);
     } else {
         console.log(`${item.title || item.name} já está nos favoritos.`);
@@ -377,10 +315,10 @@ function atualizarPersonagemAleatorio(personagem) {
     `;
 }
 
-// Função para adicionar anime aos favoritos a partir do botão
-function adicionarAnimeFavorito(button) {
-    const anime = JSON.parse(button.getAttribute('data-anime'));
-    adicionarFavorito(favoritosAnimes, anime, favoritosAnimesList);
+function adicionarPersonagemFavorito(button) {
+    // Obtém os dados do personagem a partir do atributo 'data-personagem' do botão
+    const personagem = JSON.parse(button.getAttribute('data-personagem'));
+    adicionarFavorito(favoritosPersonagens, personagem, favoritosPersonagensList);
 }
 
 // Função para adicionar personagem aos favoritos a partir do botão
@@ -389,20 +327,21 @@ function adicionarPersonagemFavorito(button) {
     adicionarFavorito(favoritosPersonagens, personagem, favoritosPersonagensList);
 }
 
-// Função principal para executar as ações
 function executar() {
     btnAnimeAleatorio.addEventListener("click", () => {
+        // Quando clicado, busca um anime aleatório e atualiza a interface com ele
         buscarAnimeAleatorio().then(anime => {
             atualizarAnimeAleatorio(anime);
         });
     });
 
-    // Botão para obter um personagem aleatório
     document.getElementById("btn-personagem").addEventListener("click", () => {
+        // Quando clicado, busca um personagem aleatório e atualiza a interface com ele
         buscarPersonagemAleatorio().then(personagem => {
             atualizarPersonagemAleatorio(personagem);
         });
     });
+}
 
     // Adicionar funcionalidade de busca de anime
     buscaButton.addEventListener("click", () => {
@@ -421,6 +360,5 @@ function executar() {
             });
         });
     });
-}
 
 document.addEventListener("DOMContentLoaded", executar);
