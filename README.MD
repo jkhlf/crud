@@ -1,13 +1,12 @@
 # CRUD, But Without the CRUD Api's
 
-Uma aplicação web que utiliza quatro APIs diferentes: a API do Pokémon, a API do OMDB (Open Movie Database), Waifu.im e a API do Jikan (para obter informações sobre animes e personagens).
+Uma aplicação web que utiliza quatro APIs diferentes: a API do Pokémon, a API do OMDB (Open Movie Database) e a API do Jikan (para obter informações sobre animes e personagens).
 
 ## Funcionalidades
 
 - **Valorant**: Busca informações sobre cada Agente e suas habilidades.
 - **Pokémon**: O usuário pode pesquisar por um Pokémon e visualizar sua miniatura.
 - **Filmes**: O usuário pode adicionar, editar e excluir filmes da sua lista. Ao clicar no botão "Detalhes", a aplicação busca as informações do filme na API do OMDB e as exibe.
-- **Waifu Gallery**: Exibe 5 imagens de waifus ou qualquer tag fornecida nos parâmetros.
 - **Animes e Personagens**: O usuário pode visualizar animes e personagens aleatórios, além de adicioná-los à lista de favoritos.
 
 ## Tecnologias Utilizadas
